@@ -12,6 +12,8 @@
     />
     <script src="https://unpkg.com/element-plus"></script>
     <style>
+      @import url("https://fonts.googleapis.com/earlyaccess/notosanstc.css");
+      @import url("https://fonts.googleapis.com/css?family=Baloo+Tamma+2:600, 700");
       .card-header {
         display: flex;
         justify-content: space-between;
@@ -20,13 +22,30 @@
       .box-card {
         width: 480px;
       }
+      html {
+        font-size: 16px;
+      }
+      span {
+        font-family: "Baloo Tamma 2";
+      }
       body {
         background-color: #e9eef3;
       }
       .el-main {
-        text-align: center;
         display: flex;
         justify-content: center;
+        align-items: center;
+      }
+      ul {
+        padding: 0;
+      }
+      li {
+        font-family: "Baloo Tamma 2";
+        font-weight: bold;
+        padding: 1rem;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 2px solid #e9eef3;
       }
     </style>
   </head>
@@ -37,25 +56,25 @@
           <template #header>
             <div class="card-header">
               <el-input type="text" v-model="text"></el-input>
-              <el-button type="primary" @click="addText">增加文字</el-button>
+              <el-button type="primary" @click="addText">新增</el-button>
             </div>
           </template>
           <ul>
             <li v-for="item in data" :key="item.id">
-              {{ item.text }}
-              <el-button type="primary" @click="editText(item)"
-                >編輯品項</el-button
+              <span>{{ item.text }}</span>
+              <el-button type="success" size="mini" @click="editText(item)"
+                >編輯</el-button
               >
-              <el-button type="primary" @click="removeText(item.id)"
-                >移除品項</el-button
+              <el-button type="danger" size="mini" @click="removeText(item.id)"
+                >移除</el-button
               >
             </li>
           </ul>
           <div class="card-header">
             <el-input type="text" v-model="temp.text">
               <template #append>
-                <el-button type="primary" @click="doneEdit" :disabled="false"
-                  >編輯完成</el-button
+                <el-button type="primary" @click="doneEdit"
+                  >點我確認編輯</el-button
                 >
               </template>
             </el-input>
