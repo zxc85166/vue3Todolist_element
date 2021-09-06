@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/element-plus/dist/index.css"
+    />
+    <script src="https://unpkg.com/element-plus"></script>
+    <style>
+      .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .box-card {
+        width: 480px;
+      }
+      body {
+        background-color: #e9eef3;
+      }
+      .el-main {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <el-main>
+        <el-card class="box-card">
+          <template #header>
+            <div class="card-header">
+              <el-input type="text" v-model="text"></el-input>
+              <el-button type="primary" @click="addText">增加文字</el-button>
+            </div>
+          </template>
+          <ul>
+            <li v-for="item in data" :key="item.id">
+              {{ item.text }}
+              <el-button type="primary" @click="editText(item)"
+                >編輯品項</el-button
+              >
+              <el-button type="primary" @click="removeText(item.id)"
+                >移除品項</el-button
+              >
+            </li>
+          </ul>
+          <div class="card-header">
+            <el-input type="text" v-model="temp.text">
+              <template #append>
+                <el-button type="primary" @click="doneEdit" :disabled="false"
+                  >編輯完成</el-button
+                >
+              </template>
+            </el-input>
+          </div>
+        </el-card>
+      </el-main>
+    </div>
+    <script>
+      const App = {
+        data() {
+          return {
+            text: "我是誰",
+            data: [],
+            temp: {},
+          };
+        },
+        methods: {
+          addText() {
+            this.data.push({
+              id: this.data.length + 1,
+              text: this.text,
+            });
+            this.text = "";
+          },
+          removeText(id) {
+            const index = this.data.findIndex((item) => item.id === id);
+            this.data.splice(index, 1);
+          },
+          editText(item) {
+            this.temp = { ...item };
+          },
+          doneEdit() {
+            const index = this.data.findIndex(
+              (item) => item.id === this.temp.id
+            );
+            this.data[index] = this.temp;
+            this.temp = {};
+          },
+        },
+      };
+
+      const app = Vue.createApp(App);
+      app.use(ElementPlus);
+      app.mount("#app");
+    </script>
+  </body>
+</html>
