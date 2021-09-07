@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>todolist</title>
     <script src="https://unpkg.com/vue@next"></script>
     <link
       rel="stylesheet"
@@ -21,6 +21,10 @@
       }
       .box-card {
         width: 480px;
+      }
+      .el-input-group__append button.el-button {
+        background-color: #1f4f7e;
+        color: rgb(255, 255, 255);
       }
       html {
         font-size: 16px;
@@ -86,7 +90,7 @@
       const App = {
         data() {
           return {
-            text: "我是誰",
+            text: "早上起床刷牙",
             data: [],
             temp: {},
           };
