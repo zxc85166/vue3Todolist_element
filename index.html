@@ -97,11 +97,15 @@
         },
         methods: {
           addText() {
-            this.data.push({
-              id: this.data.length + 1,
-              text: this.text,
-            });
-            this.text = "";
+            if (this.text != "") {
+              this.data.push({
+                id: this.data.length + 1,
+                text: this.text,
+              });
+              this.text = "";
+            } else {
+              this.text = "請輸入點東西";
+            }
           },
           removeText(id) {
             const index = this.data.findIndex((item) => item.id === id);
